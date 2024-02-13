@@ -1,8 +1,21 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SnigdhaBeautyStudio.Data;
+using SnigdhaBeautyStudio.Models;
+using SnigdhaBeautyStudio.Services;
+using Microsoft.Extensions.Azure;
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddDbContext<SnigdhaBeautyStudioContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SnigdhaBeautyStudioContext") ?? throw new InvalidOperationException("Connection string 'SnigdhaBeautyStudioContext' not found.")));
+builder.Services.AddScoped<IDocTableService, DocTableService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddTransient<SendMessageToServiceBus>();
+builder.Services.AddAzureClients(clientBuilder =>
+{
+    clientBuilder.AddBlobServiceClient(builder.Configuration["StorageAccountConnectionString:blob"], preferMsi: true);
+    clientBuilder.AddQueueServiceClient(builder.Configuration["StorageAccountConnectionString:queue"], preferMsi: true);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
