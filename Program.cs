@@ -4,10 +4,13 @@ using SnigdhaBeautyStudio.Data;
 using SnigdhaBeautyStudio.Models;
 using SnigdhaBeautyStudio.Services;
 using Microsoft.Extensions.Azure;
+using Azure.Storage.Blobs;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SnigdhaBeautyStudioContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SnigdhaBeautyStudioContext") ?? throw new InvalidOperationException("Connection string 'SnigdhaBeautyStudioContext' not found.")));
 builder.Services.AddScoped<IDocTableService, DocTableService>();
+builder.Services.AddScoped<IBlobStorageService, BlobStorageService>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<SendMessageToServiceBus>();
