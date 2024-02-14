@@ -19,7 +19,7 @@ namespace SnigdhaBeautyStudio.Controllers
         {
             BlobContent blob = new BlobContent();
             blob.Content = await this._storageService.ReadBlobContent();
-            return View();
+            return View(blob);
         }
 
         // GET: DisplayBlobContent/Details/5

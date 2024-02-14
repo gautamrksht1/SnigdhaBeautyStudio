@@ -7,7 +7,7 @@ namespace SnigdhaBeautyStudio.Services
 {
     public class BlobStorageService : IBlobStorageService
     {
-        string blobUri = "https://gautamstorage1.blob.core.windows.net/blob-container1/selectAllCustomer.sql";
+        string blobUri = "https://gautamstorage1.blob.core.windows.net/blob-container2/selectAllCustomer.sql";
         
         public async Task<string> ReadBlobContent()
         {
