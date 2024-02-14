@@ -22,7 +22,7 @@ namespace SnigdhaBeautyStudio.Controllers
         {
             BlobContent blob = new BlobContent();
             blob.Content = await this._blobStorageService.ReadBlobContent();
-            ViewBag.Blob = blob;
+            ViewBag.Blob = blob.Content;
             var data = await _doctableStoreSvc.GetDocs();
             return View(data);
         }
