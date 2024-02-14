@@ -20,6 +20,9 @@ namespace SnigdhaBeautyStudio.Controllers
         // GET: DocStoreController
         public async Task<ActionResult> Index()
         {
+            BlobContent blob = new BlobContent();
+            blob.Content = await this._blobStorageService.ReadBlobContent();
+            ViewBag.Blob = blob;
             var data = await _doctableStoreSvc.GetDocs();
             return View(data);
         }
