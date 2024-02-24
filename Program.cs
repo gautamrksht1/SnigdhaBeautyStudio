@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("SnigdhaBeautyStudioContext") ?? throw new InvalidOperationException("Connection string 'SnigdhaBeautyStudioContext' not found.")));
 builder.Services.AddScoped<IDocTableService, DocTableService>();
 builder.Services.AddScoped<IBlobStorageService, BlobStorageService>();
+builder.Services.AddScoped<IProcessOrderFunctionService, ProcessOrderFunctionService>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<SendMessageToServiceBus>();

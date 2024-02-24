@@ -26,7 +26,7 @@ namespace SnigdhaBeautyStudio.Controllers
             ViewBag.Blob = blob.Content;
 
             var res = await this._processOrderFunctionService.CallProcessOrderFunctionAsync();
-            ViewBag.OrderFunctionresult = blob.Content;
+            ViewBag.OrderFunctionresult = res;
 
             var data = await _doctableStoreSvc.GetDocs();
             return View(data);
