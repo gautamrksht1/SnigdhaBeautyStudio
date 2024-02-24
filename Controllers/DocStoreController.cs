@@ -11,11 +11,12 @@ namespace SnigdhaBeautyStudio.Controllers
 
         private IDocTableService _doctableStoreSvc;
         private IBlobStorageService _blobStorageService;
-
-        public DocStoreController(IDocTableService doctableStoreSvc, IBlobStorageService blobStorageService)
+        private IProcessOrderFunctionService _processOrderFunctionService;
+        public DocStoreController(IDocTableService doctableStoreSvc, IBlobStorageService blobStorageService, IProcessOrderFunctionService processOrderFunctionService)
         {
             _doctableStoreSvc = doctableStoreSvc;
             _blobStorageService = blobStorageService;
+            _processOrderFunctionService = processOrderFunctionService;
         }
         // GET: DocStoreController
         public async Task<ActionResult> Index()
@@ -23,6 +24,10 @@ namespace SnigdhaBeautyStudio.Controllers
             BlobContent blob = new BlobContent();
             blob.Content = await this._blobStorageService.ReadBlobContent();
             ViewBag.Blob = blob.Content;
+
+            var res = await this._processOrderFunctionService.CallProcessOrderFunctionAsync();
+            ViewBag.OrderFunctionresult = blob.Content;
+
             var data = await _doctableStoreSvc.GetDocs();
             return View(data);
         }

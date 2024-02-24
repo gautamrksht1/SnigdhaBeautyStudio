@@ -1,6 +1,5 @@
 ﻿using Azure;
 using Azure.Data.Tables;
-using NuGet.Packaging.Signing;
 using SnigdhaBeautyStudio.Models;
 
 namespace SnigdhaBeautyStudio.Services
